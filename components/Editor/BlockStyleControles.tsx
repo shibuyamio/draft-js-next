@@ -7,6 +7,7 @@ function classNames(...classes: string[]) {
 }
 
 const BLOCK_TYPES = [
+  { label: "スタイルなし", style: "unstyled" },
   { label: "H1", style: "header-one" },
   { label: "H2", style: "header-two" },
   { label: "H3", style: "header-three" },

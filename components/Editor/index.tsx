@@ -6,6 +6,7 @@ import {
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { useRef, useState } from "react";
+import blockStyleFn from "./blockStyleClasses";
 import BlockStyleControles from "./BlockStyleControles";
 import DecorationButton from "./DecorationButton";
 
@@ -46,8 +47,8 @@ const Editor = () => {
   };
 
   return (
-    <div className="m-4">
-      <div className="mb-1 ml-20 pr-4 flex items-center">
+    <div className="m-4 max-w-xl">
+      <div className="mb-1 pr-4 flex items-center">
         <div className="ml-auto flex items-center space-x-5">
           <BlockStyleControles
             editorState={editorState}
@@ -68,7 +69,7 @@ const Editor = () => {
         </div>
       </div>
       <div
-        className="shadow-sm border border-gray-300 rounded-md sm:text-sm overflow-scroll h-[500px] p-3"
+        className="shadow-sm border border-gray-300 rounded-md sm:text-sm overflow-scroll h-[500px] p-3 prose prose-stone"
         onClick={focusEditor}
       >
         <DraftEditor
@@ -77,6 +78,7 @@ const Editor = () => {
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
           placeholder="Tell a story..."
+          blockStyleFn={blockStyleFn}
         />
       </div>
     </div>
