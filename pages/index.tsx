@@ -14,6 +14,9 @@ export default function Home() {
       </Head>
 
       <main>
+        <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+          Draft.js with Next
+        </h1>
         <Editor />
       </main>
     </div>

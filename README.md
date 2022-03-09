@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+[Draft.js](https://draftjs.org/)をNext上で使えるようにするサンプル実装
+
+Draft.js `v0.11.0`
+Next.js `v12.1.0`
+TailwindCSS `v3.0.23`
+TypeScript
+
+ブロックスタイル切り替えの使い勝手が微妙。
+
 ## Getting Started
 
 First, run the development server:
