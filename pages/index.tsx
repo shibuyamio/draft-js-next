@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
-const Editor = dynamic(import("../components/Editor"), { ssr: false });
+const Editor = dynamic(import("../components/Editor/index"), { ssr: false });
 
 export default function Home() {
   return (
