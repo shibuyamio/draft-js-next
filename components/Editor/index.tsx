@@ -8,10 +8,10 @@ import "draft-js/dist/Draft.css";
 import { useRef, useState } from "react";
 import blockStyleFn from "./blockStyleClasses";
 import BlockStyleControles from "./BlockStyleControles";
-import DecorationButton from "./DecorationButton";
+import InlineStyleButtons from "./InlineStyleButtons";
 
 const Editor = () => {
-  const [editorState, setEditorState] = useState(() =>
+  const [editorState, setEditorState] = useState<EditorState>(() =>
     EditorState.createEmpty()
   );
 
@@ -19,18 +19,6 @@ const Editor = () => {
 
   const focusEditor = () => {
     editor.current && editor.current.focus();
-  };
-
-  const handleBold = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "BOLD"));
-  };
-
-  const handleUnderline = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "UNDERLINE"));
-  };
-
-  const handleItalic = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "ITALIC"));
   };
 
   const handleKeyCommand = (
@@ -54,18 +42,10 @@ const Editor = () => {
             editorState={editorState}
             setEditorState={setEditorState}
           />
-          <DecorationButton handleFunction={handleBold} description="Bold">
-            B
-          </DecorationButton>
-          <DecorationButton handleFunction={handleItalic} description="Italic">
-            I
-          </DecorationButton>
-          <DecorationButton
-            handleFunction={handleUnderline}
-            description="Underline"
-          >
-            U
-          </DecorationButton>
+          <InlineStyleButtons
+            editorState={editorState}
+            setEditorState={setEditorState}
+          />
         </div>
       </div>
       <div
