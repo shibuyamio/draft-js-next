@@ -18,3 +18,7 @@ export const getInitialContent = (id?: string) => {
 
   return EditorState.createEmpty();
 };
+
+export const removeLocalStorageItem = (id?: string) => {
+  window.localStorage.removeItem(id || "draftjscontent");
+};

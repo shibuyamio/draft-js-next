@@ -3,9 +3,10 @@ import { ContentState, EditorState } from "draft-js";
 import { useContext } from "react";
 import DecorationButton from "./DecorationButton";
 import EditorContext from "./EditorContext";
+import { removeLocalStorageItem } from "./utils";
 
 const EraseButton = () => {
-  const { editorState, setEditorState } = useContext(EditorContext);
+  const { id, editorState, setEditorState } = useContext(EditorContext);
 
   // 空の文字列を現在のテキストとして設定
   const handleClick = () => {
@@ -16,6 +17,7 @@ const EraseButton = () => {
     );
 
     setEditorState(newState);
+    removeLocalStorageItem(id);
   };
 
   return (
