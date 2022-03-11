@@ -1,7 +1,8 @@
 import { Listbox, Transition } from "@headlessui/react";
 import { MenuAlt2Icon } from "@heroicons/react/solid";
-import { EditorState, RichUtils } from "draft-js";
-import { Dispatch, Fragment, SetStateAction, useEffect, useState } from "react";
+import { RichUtils } from "draft-js";
+import { Fragment, memo, useContext, useEffect, useState } from "react";
+import EditorContext from "./EditorContext";
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -19,11 +20,6 @@ const BLOCK_TYPES = [
   { label: "番号付きリスト", style: "ordered-list-item" },
   { label: "Code Block", style: "code-block" },
 ];
-
-type Props = {
-  editorState: EditorState;
-  setEditorState: Dispatch<SetStateAction<EditorState>>;
-};
 
 type OptionProps = {
   blockStyle: {
@@ -48,7 +44,8 @@ const BlockStyleOption = ({ blockStyle }: OptionProps) => (
   </Listbox.Option>
 );
 
-const BlockStyleControles = ({ editorState, setEditorState }: Props) => {
+const BlockStyleControles = () => {
+  const { editorState, setEditorState } = useContext(EditorContext);
   const [blockStyle, setBlockStyle] = useState(BLOCK_TYPES[0]);
   const [currentType, setCurrentType] = useState("");
 
@@ -118,4 +115,4 @@ const BlockStyleControles = ({ editorState, setEditorState }: Props) => {
   );
 };
 
-export default BlockStyleControles;
+export default memo(BlockStyleControles);

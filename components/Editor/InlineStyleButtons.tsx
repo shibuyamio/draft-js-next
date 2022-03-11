@@ -1,10 +1,7 @@
-import { EditorState, RichUtils } from "draft-js";
-import { Dispatch, SetStateAction } from "react";
+import { RichUtils } from "draft-js";
+import { memo, useContext } from "react";
 import DecorationButton from "./DecorationButton";
-type Props = {
-  editorState: EditorState;
-  setEditorState: Dispatch<SetStateAction<EditorState>>;
-};
+import EditorContext from "./EditorContext";
 
 const InlineStyles = [
   { label: "B", style: "BOLD" },
@@ -12,7 +9,8 @@ const InlineStyles = [
   { label: "U", style: "UNDERLINE" },
 ];
 
-const InlineStyleButtons = ({ editorState, setEditorState }: Props) => {
+const InlineStyleButtons = () => {
+  const { editorState, setEditorState } = useContext(EditorContext);
   const handleStyle = (style: string) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, style));
   };
@@ -32,4 +30,4 @@ const InlineStyleButtons = ({ editorState, setEditorState }: Props) => {
   );
 };
 
-export default InlineStyleButtons;
+export default memo(InlineStyleButtons);
