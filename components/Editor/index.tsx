@@ -1,6 +1,4 @@
 import {
-  convertFromRaw,
-  convertToRaw,
   Editor as DraftEditor,
   EditorCommand,
   EditorState,
@@ -13,29 +11,15 @@ import BlockStyleControles from "./BlockStyleControles";
 import EditorContext from "./EditorContext";
 import EraseButton from "./EraseButton";
 import InlineStyleButtons from "./InlineStyleButtons";
+import { getInitialContent, saveContent } from "./utils";
 
-const saveContent = (editorState: EditorState) => {
-  const contentState = editorState.getCurrentContent();
-  const rawContentState = convertToRaw(contentState);
-  console.log(JSON.stringify(rawContentState));
-  window.localStorage.setItem(
-    "draftjscontent",
-    JSON.stringify(rawContentState)
-  );
+type Props = {
+  id?: string;
 };
 
-const getInitialContent = () => {
-  const content = window.localStorage.getItem("draftjscontent");
-  if (content) {
-    return EditorState.createWithContent(convertFromRaw(JSON.parse(content)));
-  }
-
-  return EditorState.createEmpty();
-};
-
-const Editor = () => {
+const Editor = ({ id }: Props) => {
   const [editorState, setEditorState] = useState<EditorState>(
-    getInitialContent()
+    getInitialContent(id)
   );
 
   const editor = useRef<null | DraftEditor>(null);
@@ -45,7 +29,7 @@ const Editor = () => {
   }, []);
 
   const handleContentChange = (editorState: EditorState) => {
-    saveContent(editorState);
+    saveContent(editorState, id);
     setEditorState(editorState);
   };
 
@@ -65,8 +49,9 @@ const Editor = () => {
   return (
     <EditorContext.Provider
       value={{
-        editorState: editorState,
-        setEditorState: setEditorState,
+        id,
+        editorState,
+        setEditorState,
       }}
     >
       <div className="m-4 max-w-xl">
@@ -74,7 +59,6 @@ const Editor = () => {
           <div className="ml-auto flex items-center space-x-5">
             <BlockStyleControles />
             <InlineStyleButtons />
-
             <EraseButton />
           </div>
         </div>

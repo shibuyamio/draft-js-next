@@ -7,6 +7,22 @@
 
 ブロックスタイル切り替えの使い勝手が微妙。
 
+## Usage
+
+```tsx
+<Editor />
+```
+
+書きかけのデータをlocalstorageに保存します。
+
+同一プロジェクト内で複数エディタを扱う場合はIDを指定してください。
+
+```tsx
+<Editor id="firstcontents" />
+...
+<Editor id="secondcontents" />
+```
+
 ## Getting Started
 
 First, run the development server:
